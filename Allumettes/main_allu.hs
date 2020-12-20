@@ -7,7 +7,7 @@ import Allu
 
 main = do
     putStrLn "Allumettes"
-    let grid = [1,3,5,7]
+    let grid = [1,3,5,0]
     let player=1
     --(line , nb) <- get_user_choice
     --let new_grid = remove_matches plateau (line, nb)

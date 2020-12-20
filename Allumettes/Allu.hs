@@ -46,12 +46,16 @@ get_best_choice_index grid =
     evals = [evaluate_grid2 new_grid (-1) | new_grid <- get_next_grids grid]
   in snd (maximumBy (comparing fst) (zip evals [0..]))
 
-get_ai_choice grid =
+get_ai_choice_pure grid =
   let
     choices = get_possible_choices grid
     best_choice_index = get_best_choice_index grid
   in choices!!best_choice_index
 
+get_ai_choice :: [Integer]-> IO (Integer,Integer)
+get_ai_choice grid = do
+  putStrLn ("AI thinking...please wait")
+  return $ get_ai_choice_pure grid
 
 --ia_choice grid =
 --  let
@@ -66,8 +70,8 @@ get_ai_choice grid =
 --get_possibles_on_line 3
 --get_possibles_on_line 7
 
-get_user_choice :: IO (Integer,Integer)
-get_user_choice = do
+get_user_choice :: [Integer] -> IO (Integer,Integer)
+get_user_choice grid= do
   line <- getLine
   nb <- getLine
   return $ (read line::Integer, read nb::Integer)
@@ -79,8 +83,8 @@ one_turn grid player = do
   putStrLn $ show grid
   putStrLn $ "player : "++ show player
 
-  (line , nb) <- get_user_choice
-
+  let choice_func = if player==2 then get_ai_choice else get_user_choice
+  (line , nb) <- choice_func grid
   let new_grid = remove_matches grid (line, nb)
   let new_player = if player==1 then 2 else 1
   return (new_grid, new_player)
