@@ -41,12 +41,12 @@ evaluate_grid_maxdepth grid ia depth
   | ia==1     = maximum [evaluate_grid_maxdepth new_grid ((-1)*ia) (depth-1) | new_grid <- get_next_grids grid]
   | otherwise = minimum [evaluate_grid_maxdepth new_grid ((-1)*ia) (depth-1) | new_grid <- get_next_grids grid]
 
-get_ia_choice_index grid =
+get_best_choice_index grid =
   let
     evals = [evaluate_grid2 new_grid (-1) | new_grid <- get_next_grids grid]
   in snd (maximumBy (comparing fst) (zip evals [0..]))
 
-get_best_choice grid =
+get_ai_choice grid =
   let
     choices = get_possible_choices grid
     best_choice_index = get_best_choice_index grid
