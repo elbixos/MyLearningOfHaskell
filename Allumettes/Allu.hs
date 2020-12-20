@@ -70,11 +70,25 @@ get_ai_choice grid = do
 --get_possibles_on_line 3
 --get_possibles_on_line 7
 
-get_user_choice :: [Integer] -> IO (Integer,Integer)
-get_user_choice grid= do
+--  ask the user its choices. no check
+ask_user_choice:: IO (Integer,Integer)
+ask_user_choice = do
+  putStrLn "Enter line number (0..3)"
   line <- getLine
+  putStrLn "Enter nb matches (1..3)"
   nb <- getLine
   return $ (read line::Integer, read nb::Integer)
+
+-- get verified choice from a human player.
+get_user_choice :: [Integer] -> IO (Integer,Integer)
+get_user_choice grid= do
+  choice <- ask_user_choice
+  if (elem choice (get_possible_choices grid))
+    then do return choice
+    else do
+      putStrLn "Error, impossible choice"
+      get_user_choice grid
+
 
 -- one turn : given a grid and a player number,
 --  returns new grid and new player number
