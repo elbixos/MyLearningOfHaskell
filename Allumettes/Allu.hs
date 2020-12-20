@@ -66,8 +66,8 @@ get_best_choice grid =
 --get_possibles_on_line 3
 --get_possibles_on_line 7
 
-get_user_choice :: IO (String,String)
+get_user_choice :: IO (Integer,Integer)
 get_user_choice = do
   line <- getLine
   nb <- getLine
-  return (line , nb)
+  return $ (read line::Integer, read nb::Integer)
