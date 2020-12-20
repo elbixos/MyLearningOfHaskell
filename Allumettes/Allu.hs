@@ -41,7 +41,7 @@ evaluate_grid_maxdepth grid ia depth
   | ia==1     = maximum [evaluate_grid_maxdepth new_grid ((-1)*ia) (depth-1) | new_grid <- get_next_grids grid]
   | otherwise = minimum [evaluate_grid_maxdepth new_grid ((-1)*ia) (depth-1) | new_grid <- get_next_grids grid]
 
-get_best_choice_index grid =
+get_ia_choice_index grid =
   let
     evals = [evaluate_grid2 new_grid (-1) | new_grid <- get_next_grids grid]
   in snd (maximumBy (comparing fst) (zip evals [0..]))
@@ -73,7 +73,7 @@ get_user_choice = do
   return $ (read line::Integer, read nb::Integer)
 
 -- one turn : given a grid and a player number,
---  returns new grid and new player number 
+--  returns new grid and new player number
 one_turn :: [Integer] -> Integer -> IO ([Integer], Integer)
 one_turn grid player = do
   putStrLn $ show grid

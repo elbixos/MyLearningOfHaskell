@@ -12,7 +12,7 @@ IIIIIII
 - a player draw between 1 and 3 matches on the line he wants.
 - player that draw the last loses.
 
-We want an IA to play, driven by a Min Max algorithm.
+We want an AI to play, driven by a Min Max algorithm.
 
 a **grid** is the configuration of matches.
 A good way to stock it is a list : [1,3,5,7]
@@ -38,7 +38,7 @@ possible choices, in the form [**choice**]
 Let's implement Min Max.
 
 For that, we need to know if IA is playing or it's adversary.
-We'il use the following convention : **ia** is a value of 1 if the IA plays, and
+We'il use the following convention : **ia** is a value of 1 if the AI plays, and
 -1 if the adversary plays.
 
 - evaluate_grid : given a **grid** and a value of **ia**,
@@ -46,5 +46,7 @@ performs a *min max* algorithm and returns the value of this configuration
 
 - evaluate_grid_maxdepth : same as before but with a max depth limit (returns 0
   if reached)
+
+- get_ia_choice : given a **grid**, returns the **choice** of the AI
 
 ## IO functions
