@@ -71,3 +71,26 @@ get_user_choice = do
   line <- getLine
   nb <- getLine
   return $ (read line::Integer, read nb::Integer)
+
+one_turn :: [Integer] -> Integer -> IO ([Integer])
+one_turn grid player = do
+  putStrLn $ show grid
+  --putStrLn "Player "++ player
+  (line , nb) <- get_user_choice
+
+  --putStrLn $ show $ remove_matches plateau (line, nb)
+  --putStrLn $ show $ line
+  let new_grid = remove_matches grid (line, nb)
+  return new_grid
+
+-- the loop for the game. returns the new grid until game is finished
+--     when finished, returns the vicorious player number in an array [player]
+game_loop :: [Integer] -> Integer -> IO ([Integer])
+game_loop grid player
+  | (sum grid) == 0 = do
+      return [player]
+  | otherwise = do
+      putStrLn $ "player : "++ show player
+      new_grid <- one_turn grid player
+      let new_player = if player==1 then 2 else 1
+      game_loop new_grid new_player

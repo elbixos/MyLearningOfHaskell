@@ -7,9 +7,10 @@ import Allu
 
 main = do
     putStrLn "Allumettes"
-    let plateau = [1,3,5,7]
-    (line , nb) <- get_user_choice
-    --putStrLn $ show $ remove_matches plateau (line, nb)
-    --putStrLn $ show $ line
-    let new_grid = remove_matches plateau (line, nb)
-    putStrLn $ show $ new_grid
+    let grid = [1,3,5,7]
+    let player=1
+    --(line , nb) <- get_user_choice
+    --let new_grid = remove_matches plateau (line, nb)
+    --putStrLn $ show $ new_grid
+    winner:_ <- game_loop grid player
+    putStrLn $ "Vainqueur : "++ show winner
