@@ -1,10 +1,12 @@
 ## The Game of Matches...
 
 A game where you have matches on the table, placed as follow
+```
 I
 III
 IIIII
 IIIIIII
+```
 
 - it's a two players game, turn by turn.
 - a player draw between 1 and 3 matches on the line he wants.
